@@ -1,0 +1,89 @@
+$change-view-size:1380px;
+.Main-content{
+    .Category-name{
+      font-size: 42px;
+      padding-top: 90px;
+      color: #1d1f22;
+    }
+    .Category-cards{
+      padding-top: 110px;
+  
+      .FlexColumn{ 
+        display: grid;
+        grid-template-columns: repeat(auto-fill, 386px);
+        grid-gap: 1rem;
+        justify-content: space-between;
+      }
+      
+     
+      @media (max-width: $change-view-size) {
+        .FlexColumn {
+          justify-content: space-around;
+        }
+      }
+      .Card{
+        padding: 16px;
+        &:hover{
+         
+  
+          box-shadow: 0px 4px 35px rgba(168, 172, 176, 0.19);
+                }
+      
+          .BuyButton{
+            width: 70px;
+            height: 70px;
+            position: absolute;
+            top: 297px;
+            left: 276px;
+          }
+      
+      
+      }
+      .OutOfStockCard{
+        opacity: 0.5;
+       }
+      .ImgCard{
+        width: 354px;
+        height: 330px;
+        position: relative;
+        .OutOfStock{
+          position: absolute;
+          left: 25%;
+          right: 25%;
+          top: 45%;
+          bottom: 45%;
+          font-style: normal;
+  font-size: 24px;
+  /* identical to box height, or 38px */
+  
+  display: flex;
+  align-items: center;
+        }
+        
+      }
+    
+    
+      
+      
+      .ContentCard{
+    min-width: 354px;
+    
+      }
+      .TitleCard{
+        font-size: 18px;
+    font-weight: 300;
+    padding-top: 24px;
+    color: #1d1f22;
+    align-self: stretch;
+    min-width: 354px;
+      }
+      .PriceCard{
+        font-size: 18px;
+        font-weight: 600;
+        line-height: 30px;
+        color: #1d1f22;
+        gap: 10px;
+      }
+      
+    }
+  }

@@ -1,0 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Raleway&display=swap');
+$font: 'Raleway';
+
+*{
+  margin: 0;
+  padding: 0;
+}
+body{
+  font-family: $font, sans-serif;
+  padding: 0px 101px 0 101px;
+  min-width: 600px;
+}
