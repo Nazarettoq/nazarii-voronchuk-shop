@@ -1,5 +1,6 @@
 import { Component } from 'react'
 import '@styles/PDP.scss'
+import '@styles/Characteristic.scss'
 class ProductPage extends Component{
 
     render(){
