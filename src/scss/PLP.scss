@@ -1,0 +1,27 @@
+$change-view-size: 1380px;
+.main-content {
+  .category-name {
+    font-size: 42px;
+    padding-top: 90px;
+    color: #1d1f22;
+    &::first-letter {
+      text-transform: capitalize;
+    }
+  }
+
+  .category-cards {
+    padding-top: 110px;
+
+    &__column {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, 380px);
+      grid-gap: 1rem;
+      justify-content: space-between;
+    }
+    @media (max-width: $change-view-size) {
+      &__column {
+        justify-content: space-around;
+      }
+    }
+  }
+}
