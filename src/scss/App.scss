@@ -8,7 +8,13 @@ $font: 'Raleway';
   padding: 0;
 }
 body{
+  position: relative;
   font-family: $font, sans-serif;
-  padding: 0px 101px 0 101px;
-  min-width: 600px;
+  padding: 0px 101px 20px 101px;
+}
+@media (width<600px) {
+  body{
+    padding: 0;
+    padding-left: 20px;
+  }
 }

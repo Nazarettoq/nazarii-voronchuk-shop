@@ -1,37 +1,48 @@
-import logo from '@img/logo.svg'
-import cart from '@img/empty_cart.svg'
-import vector from '@img/vector.svg'
 import { Component } from 'react'
+import { NavLink } from 'react-router-dom'
+import { connect } from 'react-redux'
+import { setCategoryAC } from '@redux/actions'
+import CartModal from '@components/cart-overlay/CartOverlay'
+import Currency from '@components/currency/Currency'
 import '@styles/Header.scss'
-class Header extends Component{
-
-    render(){
-        return <div className="header">
+import logo from '@img/logo.svg'
+class Header extends Component {
+  render() {
+    return (
+      <div className="header">
         <div className="header__items">
           <div className="navigation">
-            <button className="category category-selected">
-              <div className="category__name">Women</div>
-            </button>
-            <button className="category ">
-              <div className="category__name">Men</div>
-            </button>
-
-            <button className="category ">
-              <div className="category__name">Kids</div>
-            </button>
+            {this.props.categories.map((el, id) => (
+              <NavLink
+                to={`/${el.name}`}
+                className={
+                  el.name === this.props.currentCategorie
+                    ? 'category-selected category'
+                    : 'category'
+                }
+                key={id}
+                onClick={() => {
+                  this.props.sendCategory(el.name)
+                }}>
+                <div className="category__name">{el.name}</div>
+              </NavLink>
+            ))}
           </div>
           <div className="logo">
             <img src={logo} className="logo__centering" alt="logo" />
           </div>
           <div className="action">
-            <div className="action__currency-switch">
-              <div className="currency-symbol">$</div>
-              <img className="vector" src={vector} alt="" />
-            </div>
-            <img className="action__purchases" src={cart} alt="cart" />
+            <Currency />
+            <CartModal />
           </div>
         </div>
       </div>
-    }
+    )
+  }
 }
-export default Header
+
+const mapDispatchToProps = (dispatch) => ({
+  sendCategory: (state) => dispatch(setCategoryAC(state)),
+})
+
+export default connect(null, mapDispatchToProps)(Header)

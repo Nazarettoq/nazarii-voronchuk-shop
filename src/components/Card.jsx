@@ -1,42 +1,98 @@
-
 import { Component } from 'react'
 import buy from '@img/buy.svg'
-class Card extends Component{
+import { Link } from 'react-router-dom'
 
-    constructor(props) {
-        super(props);
-        this.showButton = this.showButton.bind(this);
-        this.hideButton = this.hideButton.bind(this);
-        this.state = {
-          isHovering: false,
-        };
-      }
-       showButton () {
-        this.setState(()=>({
-            isHovering:true
-        }))
-      };
-      hideButton () {
-        this.setState(()=>({
-            isHovering:false
-        }))
-      };
-    
-   
-    render(){
-        return( <div 
-        className={!this.props.isOut? 'Card':'Card OutOfStockCard'}
-        onMouseEnter={this.showButton}
-    onMouseLeave={this.hideButton}>
-    <div className="ImgCard">
-      <img src={`https://file.rendit.io/n/LiRU2maCbBEofczJiAvk.png`} alt='' />
-      {!this.props.isOut && this.state.isHovering && <img src={buy} className='BuyButton' alt=''/>}
-      {this.props.isOut && <p className="OutOfStock">OUT OF STOCK</p>}
-    </div>
-    <div className="ContentCard">
-      <div className="TitleCard">Apollo Running Short</div>
-      <div className="PriceCard">$50.00</div>
-    </div></div>)
-}}
-export default Card
+import { loadCurrentItemAC, addToCartAC } from '@redux/actions'
+import { connect } from 'react-redux'
+import '@styles/Card.scss'
+class Card extends Component {
+  constructor(props) {
+    super(props)
+    this.showButton = this.showButton.bind(this)
+    this.hideButton = this.hideButton.bind(this)
+    this.addToCard = this.addToCard.bind(this)
+    this.state = {
+      isHovering: false,
+    }
+  }
+  showButton() {
+    this.setState(() => ({
+      isHovering: true,
+    }))
+  }
 
+  hideButton() {
+    this.setState(() => ({
+      isHovering: false,
+    }))
+  }
+
+  addToCard(item) {
+    const { toCart } = this.props
+    const { attributes } = item
+
+    if (attributes.length > 0) {
+      const format = attributes.map((attribute) => {
+        const { items, type, id, name } = attribute
+        const item = items.find((attribute) => ({ item: attribute }))
+        return (attribute = { item, type, id, name })
+      })
+      const newItem = Object.assign({}, { item }, { savedAttribute: format })
+      toCart(newItem)
+    } else {
+      const newItem = Object.assign({}, { item: item })
+      toCart(newItem)
+    }
+  }
+
+  render() {
+    const { data } = this.props
+    const { sendItem } = this.props
+    return (
+      <Link to={`/product/${this.props.data.id}`} style={{ textDecoration: 'none' }}>
+        <div
+          className={this.props.data.inStock ? 'card' : 'card out-of-stock '}
+          onMouseEnter={this.showButton}
+          onMouseLeave={this.hideButton}
+          onClick={() => {
+            sendItem(data)
+          }}>
+          <div className="card__image-box">
+            <img className="image" src={this.props.data.gallery[0]} alt={this.props.data.name} />
+            {this.props.data.inStock && this.state.isHovering && (
+              <>
+                <img
+                  src={buy}
+                  role={'button'}
+                  onClick={(event) => {
+                    event.preventDefault()
+                    this.addToCard(data)
+                  }}
+                  className="to-cart"
+                  alt="to cart"
+                />
+              </>
+            )}
+            {!this.props.data.inStock && <p className="out-of-stock-text">OUT OF STOCK</p>}
+          </div>
+          <div className="card__content">
+            <div className="card__content__title">
+              {this.props.data.brand} {this.props.data.name}
+            </div>
+            <div className="card__content__price">
+              {this.props.data.prices[this.props.currency].currency.symbol}
+              {this.props.data.prices[this.props.currency].amount}
+            </div>
+          </div>
+        </div>
+      </Link>
+    )
+  }
+}
+
+const mapDispatchToProps = (dispatch) => ({
+  sendItem: (item) => dispatch(loadCurrentItemAC(item)),
+  toCart: (item) => dispatch(addToCartAC(item)),
+})
+
+export default connect(null, mapDispatchToProps)(Card)

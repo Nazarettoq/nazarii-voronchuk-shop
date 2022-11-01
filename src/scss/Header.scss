@@ -1,75 +1,72 @@
-.header{
-    .header__items{
+.header {
+  .header__items {
     height: 56px;
     display: flex;
     justify-content: space-between;
     padding-top: 24px;
-    
-    .navigation{
-        width: 250px;
-        
-        .category{
-          border-width: 0px; 
-          background: none;
-          cursor: pointer;
-          padding: 4px 16px 32px 16px;
-          &:hover {
-            opacity: 70%;
-          }
-            &__name{
-              font-family: 'Raleway';
-              font-size: 16px;
-              font-weight: 400;
-              border-radius: 0px;
-              text-transform: uppercase;
-              color: #1d1f22;
-            }
+    .navigation {
+      width: 250px;
+      display: flex;
+
+      .category {
+        cursor: pointer;
+        text-decoration: none;
+        padding: 4px 16px 32px 16px;
+        &:hover {
+          opacity: 70%;
         }
-        .category-selected{
-          border-bottom: 2px solid #5ECE7B;
-          .category__name{
-            font-weight: 600;
-            color: #5ece7b;
-          }
+        &__name {
+          font-size: 16px;
+          font-weight: 400;
+          text-transform: uppercase;
+          color: #1d1f22;
+        }
+      }
+      .category-selected {
+        border-bottom: 2px solid #5ece7b;
+        .category__name {
+          font-weight: 600;
+          color: #5ece7b;
+        }
+        &:hover {
+          opacity: 100%;
         }
       }
     }
-    .logo{
-      width: 41px;
-      height: 41px;   
-        &__centering{
-          padding: 13% 12%;
-        }
-    }
-    .action{
-      width: 250px;
-      display: flex;
-      gap: 22px;
-      padding-bottom: 25px;
-      justify-content: flex-end;
-      align-items: center;
-  
-        &__currency-switch{
-          width: 38px;
-          height: 29px;
-          position: relative;
-          .currency-symbol{
-            font-size: 18px;
-            line-height: 30px;
-            padding: 0px 10px;
-          }
-          .vector{
-            width: 7px;
-            height: 4px;
-            position: absolute;
-            top: 15.5px;
-            left: 31.5px;
-          }
-        }
-      
-        &__purchases{
-          width: 20px;
-          height: 20px;
-        }
+  }
+  .logo {
+    position: absolute;
+    left: 50%;
+  }
+
+  .action {
+    display: flex;
+    gap: 22px;
+    padding-bottom: 25px;
+    justify-content: flex-end;
+    align-items: center;
+    &__purchases {
+      width: 20px;
+      height: 20px;
     }
   }
+}
+@media (width<600px) {
+  .header {
+    display: flex;
+    justify-content: center;
+    .logo {
+      display: none;
+    }
+    .header__items {
+      justify-content: flex-start;
+    }
+  }
+}
+@media (width<1000px) {
+  .header {
+    .logo {
+      position: static;
+    }
+  }
+}
