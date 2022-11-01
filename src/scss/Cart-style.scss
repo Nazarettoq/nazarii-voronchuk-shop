@@ -1,0 +1,91 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@700&display=swap');
+$Roboto_Condensed:'Roboto Condensed';
+$dark:#1d1f22;
+
+.cart{
+    font-size: 32px;
+  font-family: Raleway;
+  font-weight: 700;
+  line-height: 40px;
+  text-transform: uppercase;
+  color: #1d1f22;
+  align-self: flex-start;
+      padding-top: 83px;
+}
+.line{
+    width: 1240px;
+    height: 1px;
+    margin-top: 48px;
+    
+    background: #E5E5E5;
+}
+.underline{
+    width: 1240px;
+    height: 1px;
+    margin-top: 30px;
+    
+    background: #E5E5E5;
+}
+.item{
+padding-top: 24px;
+max-width: 600px;
+}
+
+.row{
+    display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 1240px;
+  justify-content: space-between;
+}
+.count{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    margin-right: 24px;
+    &__square{
+      width: 45px;
+    height: 45px;
+    border: 1px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+  }
+  &__number{
+    font-size: 24px;
+  }
+}
+
+ .product{
+  height: 256px;
+  background-size: cover;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 16px 16px 16px 128px;
+ background-color: red;
+ &__block{
+  display: flex;
+  width: 54px;
+  justify-content: space-between;
+  flex-direction: row;
+}
+ }
+ .slider{
+  width: 24px;
+  height: 24px;
+ 
+  background-color: rgba(0, 0, 0, 0.73);
+ 
+  display: flex;
+  justify-content: center;
+  justify-items: center;
+  &__button{
+    width: 10px;
+  }
+ }
+
