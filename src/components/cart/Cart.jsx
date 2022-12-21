@@ -1,4 +1,4 @@
-import { Component } from 'react'
+import React from 'react'
 import { connect } from 'react-redux'
 import { addToCartAC, removeFromCartAC, changeAttributeAC } from '@redux/actions'
 import Attributes from '../Attributes'
@@ -8,7 +8,7 @@ import MinusSquare from '@img/minus-square.svg'
 import '@styles/Cart.scss'
 import '@styles/Cart-modal.scss'
 
-class Cart extends Component {
+class Cart extends React.PureComponent {
   render() {
     const { currency } = this.props
     return (
@@ -18,7 +18,7 @@ class Cart extends Component {
             const itemInfo = item.item
             return (
               <div className={`row row${this.props.styleOf}`} key={id}>
-                <div className={`discription-block`}>
+                <div className={`description-block`}>
                   <div className={`name`}>
                     <div className={`name__brand`}>{itemInfo.brand}</div>
                     <div>{itemInfo.name}</div>
@@ -36,26 +36,20 @@ class Cart extends Component {
 
                 <div className={`amount-block`}>
                   <div className={`actions`}>
-                    <img
-                      className={`plus`}
-                      src={PlusSquare}
-                      value={item}
-                      alt="plus"
+                    <button
+                      className="plus"
+                      style={{ backgroundImage: `url(${PlusSquare})` }}
                       onClick={() => {
                         this.props.amountIncrement(item)
-                      }}
-                    />
+                      }}></button>
 
                     <div className={`quantity`}>{item.quantity}</div>
-                    <img
-                      className={`minus`}
-                      src={MinusSquare}
-                      alt="minus"
-                      value={item}
+                    <button
+                      className="minus"
+                      style={{ backgroundImage: `url(${MinusSquare})` }}
                       onClick={() => {
                         this.props.itemRemove(item)
-                      }}
-                    />
+                      }}></button>
                   </div>
                   <CartGallery styleOf={`${this.props.styleOf}`} images={item.item.gallery} />
                 </div>

@@ -1,7 +1,6 @@
 import React from 'react'
-import { Component } from 'react'
 import './Preloader.scss'
-class Preloader extends Component {
+class Preloader extends React.PureComponent {
   render() {
     return (
       <div className="load">

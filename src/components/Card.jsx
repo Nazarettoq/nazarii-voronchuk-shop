@@ -1,16 +1,16 @@
-import { Component } from 'react'
+import React from 'react'
 import buy from '@img/buy.svg'
 import { Link } from 'react-router-dom'
 
 import { loadCurrentItemAC, addToCartAC } from '@redux/actions'
 import { connect } from 'react-redux'
 import '@styles/Card.scss'
-class Card extends Component {
+class Card extends React.PureComponent {
   constructor(props) {
     super(props)
     this.showButton = this.showButton.bind(this)
     this.hideButton = this.hideButton.bind(this)
-    this.addToCard = this.addToCard.bind(this)
+    this.addToCart = this.addToCart.bind(this)
     this.state = {
       isHovering: false,
     }
@@ -27,7 +27,7 @@ class Card extends Component {
     }))
   }
 
-  addToCard(item) {
+  addToCart(item) {
     const { toCart } = this.props
     const { attributes } = item
 
@@ -59,18 +59,15 @@ class Card extends Component {
           }}>
           <div className="card__image-box">
             <img className="image" src={this.props.data.gallery[0]} alt={this.props.data.name} />
-            {this.props.data.inStock && this.state.isHovering && (
+            {this.props.data.inStock /* && this.state.isHovering */ && (
               <>
-                <img
-                  src={buy}
-                  role={'button'}
+                <button
+                  className="to-cart"
+                  style={{ backgroundImage: `url(${buy})` }}
                   onClick={(event) => {
                     event.preventDefault()
-                    this.addToCard(data)
-                  }}
-                  className="to-cart"
-                  alt="to cart"
-                />
+                    this.addToCart(data)
+                  }}></button>
               </>
             )}
             {!this.props.data.inStock && <p className="out-of-stock-text">OUT OF STOCK</p>}

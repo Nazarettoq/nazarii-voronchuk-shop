@@ -3,16 +3,18 @@
   height: 29px;
   position: relative;
   cursor: pointer;
+
   .currency-symbol {
     font-size: 18px;
     line-height: 30px;
     padding: 0px 10px;
+    display: flex;
+    flex-direction: row;
   }
   .vector {
-    position: absolute;
     top: 12px;
-    left: 26px;
     width: 10px;
+    padding-left: 4px;
   }
 }
 .currency-list {
@@ -26,14 +28,18 @@
 .box {
   box-shadow: 0px 4px 35px 0px rgba(168, 172, 176, 0.19);
   padding: 10px 0 10px 0;
+  position: relative;
   display: flex;
   flex-direction: column;
+  z-index: 100;
   &__item {
     height: 32px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     width: 100%;
+    background-color: #ffffff;
+
     cursor: pointer;
     &__content {
       padding-left: 25%;

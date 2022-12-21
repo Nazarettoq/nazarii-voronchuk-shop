@@ -1,10 +1,10 @@
-import React, { Component } from 'react'
+import React from 'react'
 
 import NextImg from '@img/next_img.svg'
 import PrevImg from '@img/prev_img.svg'
 import '@styles/Cart.scss'
 
-class CartGallery extends Component {
+class CartGallery extends React.PureComponent {
   constructor(props) {
     super(props)
     this.state = { imageIndex: 0 }
@@ -42,14 +42,16 @@ class CartGallery extends Component {
         </div>
         <div className={`cart-img-box__arrow`}>
           {images.length > 1 && (
-            <div onClick={this.previousImage}>
-              <img className={`direction`} src={PrevImg} alt="back" />
-            </div>
-          )}
-          {images.length > 1 && (
-            <div onClick={this.nextImage}>
-              <img className={`direction`} src={NextImg} alt="next" />
-            </div>
+            <>
+              <button
+                className="direction"
+                style={{ backgroundImage: `url(${PrevImg})` }}
+                onClick={this.previousImage}></button>
+              <button
+                className="direction"
+                style={{ backgroundImage: `url(${NextImg})` }}
+                onClick={this.nextImage}></button>
+            </>
           )}
         </div>
       </div>

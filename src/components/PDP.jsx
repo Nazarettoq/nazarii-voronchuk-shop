@@ -1,20 +1,20 @@
-import React, { PureComponent } from 'react'
+import React from 'react'
 import { connect } from 'react-redux'
 import { addToCartAC } from '@redux/actions'
 import { client } from '@apollo-folder/client'
 import { SELECTED_PRODUCT } from '@apollo-folder/requests'
+import DOMPurify from 'isomorphic-dompurify'
 import Attributes from './Attributes'
 import '@styles/PDP.scss'
 import '@styles/Characteristic.scss'
 import Preloader from './preloader/Preloader'
 
-class ProductDescription extends PureComponent {
+class ProductDescription extends React.PureComponent {
   constructor(props) {
     super(props)
     this.getProduct = this.getProduct.bind(this)
     this.saveAttribute = this.saveAttribute.bind(this)
-
-    this.addToCatr = this.addToCatr.bind(this)
+    this.addToCart = this.addToCart.bind(this)
     this.mapProduct = this.mapProduct.bind(this)
     this.setMainImage = this.setMainImage.bind(this)
     this.state = {
@@ -61,17 +61,22 @@ class ProductDescription extends PureComponent {
       this.setState({ chosenImage: img })
     }
   }
-  addToCatr() {
+  addToCart() {
     const { toCart } = this.props
     const { savedAttributes, item: prod } = this.state
-    const notNull = this.state.savedAttributes.every((el) => el.item !== null)
-    if (notNull) {
-      let item = {}
-      item.savedAttribute = savedAttributes
-      item.item = prod
-      toCart(item)
+    if (prod.attributes.length === 0) {
+      const newItem = Object.assign({}, { item: prod })
+      toCart(newItem)
     } else {
-      alert('Please select all attributes of your current item.')
+      const notNull = this.state.savedAttributes.every((el) => el.item !== null)
+      if (notNull) {
+        const item = {}
+        item.savedAttribute = savedAttributes
+        item.item = prod
+        toCart(item)
+      } else {
+        alert('Please select all attributes of your current item.')
+      }
     }
   }
   async getProduct() {
@@ -94,7 +99,7 @@ class ProductDescription extends PureComponent {
     const item = this.state.item
     const currency = this.props.currency
     const { savedAttributes } = this.state
-
+    const safeDescription = DOMPurify.sanitize(item.description)
     return this.state.isLoaded ? (
       <>
         <div className="PDP">
@@ -114,8 +119,8 @@ class ProductDescription extends PureComponent {
             </div>
             <img className="pictures__main" src={this.state.chosenImage} alt={'main'} />
           </div>
-          <div className="discription">
-            <div className="discription__content">
+          <div className="description">
+            <div className="description__content">
               <div className="name">
                 <div className="name__brand">{item.brand}</div>
                 <div>{item.name}</div>
@@ -131,16 +136,16 @@ class ProductDescription extends PureComponent {
                 {item.prices[currency].currency.symbol + item.prices[currency].amount}
               </div>
               {item.inStock ? (
-                <div className="button in_stock" onClick={() => this.addToCatr()}>
+                <div className="button in_stock" onClick={() => this.addToCart()}>
                   ADD TO CARD
                 </div>
               ) : (
                 <div className="button out_of_stock">Out of Stock</div>
               )}
-              <div className="item__discription">
+              <div className="item__description">
                 <div
-                  className="item__discription__text"
-                  dangerouslySetInnerHTML={this.createMarkup(item.description)}></div>
+                  className="item__description__text"
+                  dangerouslySetInnerHTML={this.createMarkup(safeDescription)}></div>
               </div>
             </div>
           </div>

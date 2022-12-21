@@ -1,4 +1,4 @@
-import { Component } from 'react'
+import React from 'react'
 import { NavLink } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { setCategoryAC } from '@redux/actions'
@@ -6,7 +6,7 @@ import CartModal from '@components/cart-overlay/CartOverlay'
 import Currency from '@components/currency/Currency'
 import '@styles/Header.scss'
 import logo from '@img/logo.svg'
-class Header extends Component {
+class Header extends React.PureComponent {
   render() {
     return (
       <div className="header">
@@ -16,9 +16,7 @@ class Header extends Component {
               <NavLink
                 to={`/${el.name}`}
                 className={
-                  el.name === this.props.currentCategorie
-                    ? 'category-selected category'
-                    : 'category'
+                  el.name === this.props.currentCategory ? 'category-selected category' : 'category'
                 }
                 key={id}
                 onClick={() => {

@@ -2,7 +2,7 @@ import { Component } from 'react'
 import { connect } from 'react-redux'
 import { sendProductsAC } from '@redux/actions'
 import { client } from '@apollo-folder/client'
-import { SELECTED_CATEGORIE } from '@apollo-folder/requests'
+import { SELECTED_CATEGORY } from '@apollo-folder/requests'
 import Card from './Card'
 import '@styles/PLP.scss'
 import Preloader from './preloader/Preloader'
@@ -20,7 +20,7 @@ class ProductListing extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    if (prevProps.currentCategorie !== this.props.currentCategorie) {
+    if (prevProps.currentCategory !== this.props.currentCategory) {
       this.setState({ isLoaded: false })
       this.fetchProducts()
     }
@@ -28,10 +28,10 @@ class ProductListing extends Component {
   async fetchProducts() {
     const { saveProducts } = this.props
     const result = await client.query({
-      query: SELECTED_CATEGORIE,
+      query: SELECTED_CATEGORY,
       variables: {
         input: {
-          title: `${this.props.currentCategorie}`,
+          title: `${this.props.currentCategory}`,
         },
       },
     })
@@ -39,10 +39,10 @@ class ProductListing extends Component {
     this.setState({ isLoaded: true })
   }
   render() {
-    const { currentCategorie } = this.props
+    const { currentCategory } = this.props
     return this.state.isLoaded ? (
       <div className="main-content">
-        <p className="category-name">{currentCategorie}</p>
+        <p className="category-name">{currentCategory}</p>
         <div className="category-cards">
           <div className="category-cards__column">
             {this.props.products.map((product, id) => (

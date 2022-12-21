@@ -9,7 +9,7 @@ $dark: #1d1f22;
   justify-content: space-between;
 
   padding-top: 10px;
-  .discription-block {
+  .description-block {
     padding-top: 0;
     .name {
       all: initial;
@@ -111,10 +111,12 @@ $dark: #1d1f22;
       .plus {
         width: 25px;
         height: 25px;
+        background-size: 25px;
       }
       .minus {
         width: 25px;
         height: 25px;
+        background-size: 25px;
       }
       .quantity {
         font-size: 16px;

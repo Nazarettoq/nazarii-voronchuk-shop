@@ -7,7 +7,7 @@ export const CATEGORIES_NAME = gql`
     }
   }
 `
-export const SELECTED_CATEGORIE = gql`
+export const SELECTED_CATEGORY = gql`
   query currCat($input: CategoryInput) {
     category(input: $input) {
       name

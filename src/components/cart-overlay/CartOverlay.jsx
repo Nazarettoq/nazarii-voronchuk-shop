@@ -27,7 +27,11 @@ class CartOverlay extends React.PureComponent {
   handleOutClick = (e) => {
     if (!this.node.contains(e.target)) this.handleClick()
   }
-
+  componentDidMount() {
+    if (this.props.isModal) {
+      this.props.setModal(false)
+    }
+  }
   render() {
     const { cart } = this.props
     const cartItemCount = totalItemCount(cart)

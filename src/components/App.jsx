@@ -1,4 +1,4 @@
-import { Component } from 'react'
+import React from 'react'
 import { connect } from 'react-redux'
 import { Route, Routes } from 'react-router-dom'
 import { client } from '@apollo-folder/client'
@@ -11,7 +11,7 @@ import CartMain from './cart/CartMain'
 
 import '@styles/App.scss'
 
-class App extends Component {
+class App extends React.PureComponent {
   constructor(props) {
     super(props)
     this.state = {
@@ -27,27 +27,24 @@ class App extends Component {
   }
 
   render() {
-    const currentCategorie = this.props.category ? this.props.category : 'all'
-    const basename = process.env.PUBLIC_URL
+    const currentCategory = this.props.category ? this.props.category : 'all'
     return (
       <div className="app">
         {!this.state.isLoaded && (
           <>
-            <Header categories={this.state.categories} currentCategorie={currentCategorie} />
+            <Header categories={this.state.categories} currentCategory={currentCategory} />
             {this.props.isModal && <div id="overlay"></div>}
-
-            <Routes>
-              <Route
-                path={`${basename}/${currentCategorie}`}
-                element={<ProductListing currentCategorie={currentCategorie} />}
-              />
-              <Route
-                path={`${basename}/`}
-                element={<ProductListing currentCategorie={currentCategorie} />}
-              />
-              <Route path={`${basename}/product/:id`} element={<ProductDescription />} />
-              <Route path={`${basename}/cart`} element={<CartMain />} />
-            </Routes>
+            <div className="app-content">
+              <Routes>
+                <Route
+                  path={`/${currentCategory}`}
+                  element={<ProductListing currentCategory={currentCategory} />}
+                />
+                <Route path={`/`} element={<ProductListing currentCategory={currentCategory} />} />
+                <Route path={`/product/:id`} element={<ProductDescription />} />
+                <Route path={`/cart`} element={<CartMain />} />
+              </Routes>
+            </div>
           </>
         )}
       </div>

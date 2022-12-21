@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { client } from '@apollo-folder/client'
 import { connect } from 'react-redux'
 import vectorDown from '@img/down.svg'
@@ -6,7 +6,7 @@ import vectorUp from '@img/up.svg'
 import { GET_CURRENCIES } from '@apollo-folder/requests'
 import { setCurrencyAC } from '@redux/actions'
 import '@styles/Currency.scss'
-class Currency extends Component {
+class Currency extends React.PureComponent {
   constructor() {
     super()
     this.fetchCurrency = this.fetchCurrency.bind(this)
@@ -69,7 +69,6 @@ class Currency extends Component {
             <div className="currency-list" active={`${this.state.showModal}`} id="options">
               {this.state.showModal && (
                 <div className="box">
-                  {' '}
                   {this.state.currencies.map((item, id) => (
                     <div className="box__item" onClick={() => sendCurrency(id)} key={id}>
                       <div className="box__item__content">{`${item.symbol} ${item.label}`}</div>

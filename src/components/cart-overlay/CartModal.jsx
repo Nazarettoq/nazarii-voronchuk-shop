@@ -1,11 +1,12 @@
-import React, { PureComponent } from 'react'
+import React from 'react'
 import { connect } from 'react-redux'
+
 import { Link } from 'react-router-dom'
 import '@styles/CartModal.scss'
 import Cart from '@components/cart/Cart'
 import { getTotalPrice, totalItemCount } from '@redux/cart.utils'
 
-class CartModal extends PureComponent {
+class CartModal extends React.PureComponent {
   render() {
     const { cart, closeModal, currency } = this.props
     const totalItems = totalItemCount(cart)

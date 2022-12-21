@@ -6,8 +6,8 @@ $index: calc(1vw + 1vh);
   flex-direction: row;
   justify-content: center;
   gap: 40px;
-  padding-top: 100px;
   min-height: 700px;
+  padding: 100px 101px 20px 101px;
 }
 .pictures {
   display: flex;
@@ -46,7 +46,7 @@ $index: calc(1vw + 1vh);
   }
 }
 
-.discription {
+.description {
   display: flex;
   flex-direction: row;
   padding-left: 100px;
@@ -90,7 +90,7 @@ $index: calc(1vw + 1vh);
       transform: scale(0.9);
     }
 
-    .item__discription {
+    .item__description {
       margin-top: 40px;
       max-width: 400px;
       height: 300px;
@@ -132,7 +132,7 @@ $index: calc(1vw + 1vh);
       margin-left: 0px;
     }
   }
-  .discription {
+  .description {
     padding-left: 0;
   }
 }
@@ -142,8 +142,8 @@ $index: calc(1vw + 1vh);
     align-content: center;
     align-items: center;
   }
-  .discription {
-    .item__discription {
+  .description {
+    .item__description {
       height: auto;
     }
   }

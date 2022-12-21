@@ -14,7 +14,7 @@ $change-view-size: 1380px;
 
     &__column {
       display: grid;
-      grid-template-columns: repeat(auto-fill, 380px);
+      grid-template-columns: repeat(3, 380px);
       grid-gap: 1rem;
       justify-content: space-between;
     }
